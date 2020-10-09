@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/Brushes.xaml" />
+        <ResourceDictionary Source="Styles/Button.xaml" />
+        <ResourceDictionary Source="Styles/ComboBox.xaml" />
+        <ResourceDictionary Source="Styles/Expander.xaml" />
+        <ResourceDictionary Source="Styles/HeaderedContentControl.xaml" />
+        <ResourceDictionary Source="Styles/Hyperlink.xaml" />
+        <ResourceDictionary Source="Styles/Label.xaml" />
+        <ResourceDictionary Source="Styles/ListView.xaml" />
+        <ResourceDictionary Source="Styles/Menu.xaml" />
+        <ResourceDictionary Source="Styles/PasswordBox.xaml" />
+        <ResourceDictionary Source="Styles/ProgressBar.xaml" />
+        <ResourceDictionary Source="Styles/StatusBar.xaml" />
+        <ResourceDictionary Source="Styles/TabControl.xaml" />
+        <ResourceDictionary Source="Styles/TextBox.xaml" />
+        <ResourceDictionary Source="Styles/ToggleButton.xaml" />
+        <ResourceDictionary Source="Styles/ToolBar.xaml" />
+        <ResourceDictionary Source="Styles/TreeView.xaml" />
+        <ResourceDictionary Source="Styles/TreeViewItem.xaml" />
+        <ResourceDictionary Source="Styles/Window.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

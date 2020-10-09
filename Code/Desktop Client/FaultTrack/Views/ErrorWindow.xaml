@@ -1,0 +1,46 @@
+﻿<windows:ThemedWindow x:Class="FaultTrack.Windows.Views.ErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaultTrack.Windows.Views"
+        xmlns:windows="clr-namespace:FaultTrack.Windows;assembly=FaultTrack.Windows"
+        xmlns:viewModels="clr-namespace:FaultTrack.Windows.ViewModels"
+        mc:Ignorable="d"
+        Style="{StaticResource ThemedWindowStyle}"
+        ResizeMode="NoResize"
+        Background="#324055"
+        Title="FaultTrack"  
+        Width="354"
+        Height="420" 
+        d:DataContext="{d:DesignInstance viewModels:ErrorViewModel}"
+        WindowStartupLocation="CenterScreen">
+    <Border>
+        <Border.Background>
+            <ImageBrush RenderOptions.BitmapScalingMode="NearestNeighbor" AlignmentX="Left" AlignmentY="Top" Stretch="Uniform" TileMode="None" Viewport="0,0,340,400" Viewbox="0,0,340,400"  ImageSource="../Images/ErrorWindow.bmp"/>
+        </Border.Background>
+        <StackPanel Margin="26,70,6,0">
+            <TextBlock TextWrapping="Wrap">
+                <Run FontSize="18px" FontWeight="Light" Foreground="White" Text="Oops! Something went wrong."/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run FontSize="12px" Foreground="LightGray" Text="FaultTrack ran into a problem and cannot continue. Error info will be collected and sent to our team for review." />
+                <LineBreak/>
+                <LineBreak/>
+                <Run FontSize="12px" Foreground="LightGray" Text="Error:"/>
+                <Run FontSize="12px" Foreground="White" Text="{Binding ExceptionType, Mode=OneWay}"/>
+                <LineBreak/>
+                <Run FontSize="72px" Foreground="White" Text=":("/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run FontSize="12px" Foreground="LightGray" Text="This program is protected by U.S. and international copyright laws as described in Help/About."/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run FontSize="12px" Foreground="LightGray" Text="© 2016 DCOM Engineering, LLC"/>
+                <LineBreak/>
+                <Run FontSize="12px" Foreground="LightGray" Text="All rights reserved."/>
+            </TextBlock>
+        </StackPanel>
+    </Border>
+</windows:ThemedWindow>
+
