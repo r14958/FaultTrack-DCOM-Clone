@@ -146,31 +146,7 @@
 
         private async Task SignIn(string account, string userName, string password)
         {
-            IsBusy = true;
-
-            try
-            {
-                await shell.SignInAsync(new Uri($"{account}"), userName, password);
-
-                if (Error != null)
-                {
-                    Error = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Error = ex.Message;
-                
-                // necessary to ensure focus works, because it won't work 
-                // if the controls are still disabled based on this property being true
-                IsBusy = false; 
-
-                OnFocusRequested(nameof(Password));
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            
         }
 
         private void ChangeAccount()

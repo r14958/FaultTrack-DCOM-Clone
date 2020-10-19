@@ -75,8 +75,6 @@
     </Compile>
     <Compile Include="UserToken.cs" />
     <Compile Include="DataContext.cs" />
-    <Compile Include="DataModel.cs" />
-    <Compile Include="IDataContext.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectCollection.cs" />
     <Compile Include="ProjectTreeNode.cs" />

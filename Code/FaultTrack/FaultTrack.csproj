@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>FaultTrack.Windows</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Desktop Client\FaultTrack.Shell\FaultTrack.Shell.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="App.ico" />
+    <Resource Include="Images\ErrorWindow.bmp" />
+    <Resource Include="Shell.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Splash.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ShellMenuView.xaml.cs">
+      <DependentUpon>ShellMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ShellWindow.xaml.cs">
+      <DependentUpon>ShellWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ShellMenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ShellWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
