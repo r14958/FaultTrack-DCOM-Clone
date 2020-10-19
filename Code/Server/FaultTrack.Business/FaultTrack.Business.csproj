@@ -69,10 +69,6 @@
       <Project>{2a08395b-1bf1-4d86-93a1-d5438761cffb}</Project>
       <Name>FaultTrack.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FaultTrack.Web\FaultTrack.Web.csproj">
-      <Project>{86F7E65D-68F6-4582-99E2-E189ABBCAFB4}</Project>
-      <Name>FaultTrack.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Strings.resx">

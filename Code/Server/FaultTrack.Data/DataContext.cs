@@ -1,93 +1,97 @@
-﻿namespace FaultTrack.Data
+namespace FaultTrack.Data
 {
-    using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Linq;
-
-    public sealed class DataContext : IDataContext
+    using System.Data.Entity.ModelConfiguration.Conventions;
+    
+    /// <summary>
+    /// Data access context for accessing data entities.
+    /// </summary>
+    public class DataContext : DbContext
     {
-        private readonly DataModel model;
-        private bool disposed;
-
-        public DataContext()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        public DataContext() : base("name=FaultTrack")
         {
-            model = new DataModel();
         }
 
-        public DataContext(string connectionString)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="connectionString">A <see cref="string"/> containing connection information.</param>
+        public DataContext(DbContextOptions<DataContext> options) : base(connectionString)
         {
-            model = new DataModel(connectionString);
         }
 
-        public IQueryable<ProjectCollection> ProjectCollections => model.ProjectCollections;
-        public IQueryable<Project> Projects                     => model.Projects;
-        public IQueryable<ProjectVersion> ProjectVersions       => model.ProjectVersions;
-        public IQueryable<User> Users                           => model.Users;
-        public IQueryable<UserToken> UserTokens                 => model.UserTokens;
-
-        public T Find<T>(params object[] keyValues) where T : class
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="Project"/> entities.
+        /// </summary>
+        public virtual DbSet<Project> Projects
         {
-            return model.Set<T>().Find(keyValues);
+            get;
+            set;
         }
 
-        public IEnumerable<T> SqlQuery<T>(string sql)
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="ProjectCollection"/> entities.
+        /// </summary>
+        public virtual DbSet<ProjectCollection> ProjectCollections
         {
-            return model.Database.SqlQuery<T>(sql);
+            get; 
+            set;
         }
 
-        public void Add<T>(T item) where T : class
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="User"/> entities.
+        /// </summary>
+        public virtual DbSet<ProjectVersion> ProjectVersions
         {
-            model.Set<T>().Add(item);
+            get; 
+            set;
         }
 
-        public void Delete<T>(T item) where T : class
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="Role"/> entities.
+        /// </summary>
+        public virtual DbSet<Role> Roles
         {
-            model.Set<T>().Remove(item);
+            get;
+            set;
         }
 
-        public void Update<T>(T item) where T : class
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="User"/> entities.
+        /// </summary>
+        public virtual DbSet<User> Users
         {
-            var entry = model.Entry(item);
+            get; 
+            set;
+        }
 
-            if (entry.State == EntityState.Detached)
-            {
-                ThrowEntityDetachedException<T>();
-            }
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="UserRole"/> entities.
+        /// </summary>
+        public virtual DbSet<UserRole> UserRoles
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the collection that contains <see cref="UserToken"/> entities.
+        /// </summary>
+        public virtual DbSet<UserToken> UserTokens 
+        { 
+            get; 
+            set;
+        }
+
+        /// <inheritdoc />
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<DataContext>(null);
             
-            entry.State = EntityState.Modified;
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public void Commit()
-        {
-            model.SaveChanges();
-        }
-
-        private static void ThrowEntityDetachedException<T>()
-        {
-            throw new InvalidOperationException($"Instance of {typeof(ProjectCollection).Name} is not attached to the context.");
-        }
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (!disposing || disposed)
-            {
-                return;
-            }
-
-            model.Dispose();
-
-            disposed = true;
-        }
-
-        #endregion
     }
 }

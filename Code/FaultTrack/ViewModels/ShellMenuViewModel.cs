@@ -1,15 +1,15 @@
 ﻿// -----------------------------------------------------------------------------
-//  <copyright file="IShell.cs" company="DCOM Engineering, LLC">
+//  <copyright file="Shell.cs" company="DCOM Engineering, LLC">
 //      Copyright (c) DCOM Engineering, LLC.  All rights reserved.
 //  </copyright>
 // -----------------------------------------------------------------------------
 
-namespace FaultTrack.Shell
+namespace FaultTrack.Windows.ViewModels
 {
     /// <summary>
-    /// An application container of packages, services and components that together makeup the logical structure of the application.
+    /// Class that models the main application menu view.
     /// </summary>
-    public interface IShell
+    public class ShellMenuViewModel
     {
     }
 }
