@@ -6,7 +6,7 @@
 
 namespace FaultTrack.Windows.ViewModels
 {
-    using FaultTrack.Shell;
+    using Shell;
 
     /// <summary>
     /// Class that models the shell view.

@@ -6,7 +6,6 @@
 
 namespace FaultTrack.Windows.Models
 {
-    using System.Collections.Generic;
     using FaultTrack.Shell;
 
     /// <inheritdoc cref="IShell"/>

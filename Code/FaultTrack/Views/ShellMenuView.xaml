@@ -8,7 +8,7 @@
 
     <DockPanel>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
             <Button Style="{DynamicResource WindowCaptionButtonStyle}" Padding="24,0">
                 <TextBlock VerticalAlignment="Center">
                     <Run Text="File"/>
@@ -16,9 +16,14 @@
             </Button>
         </StackPanel>
 
-        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Foreground="White">
-            <Run Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type windows:ThemedWindow}}}" />
-        </TextBlock>
+        <Border Background="{StaticResource WindowBorderCaptionButtonMouseDownBrush}" 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Padding="12,6">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White">
+                <Run Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type windows:ThemedWindow}}}" />
+            </TextBlock>
+        </Border>
     </DockPanel>
 
 </UserControl>
