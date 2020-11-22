@@ -6,6 +6,7 @@
 
 namespace FaultTrack.Shell.Windows
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
@@ -15,6 +16,14 @@ namespace FaultTrack.Shell.Windows
     /// <typeparam name="T">The parameter type of the asynchronous method argument.</typeparam>
     public interface IAsyncCommand<in T> : ICommand
     {
+        /// <summary>
+        /// Gets a value indicating whether a task executed by this command is still running.
+        /// </summary>
+        IEnumerable<Task> RunningTasks
+        {
+            get;
+        }
+
         /// <inheritdoc cref="ICommand.CanExecute" />
         bool CanExecute(T parameter);
 

@@ -7,13 +7,32 @@
 namespace FaultTrack.Shell.Windows
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
     /// <inheritdoc cref="IAsyncCommand{T}"/>
     public abstract class AsyncCommand<T> : IAsyncCommand<T>
     {
+        private readonly ObservableCollection<Task> runningTasks;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AsyncCommand{T}"/> class.
+        /// </summary>
+        protected AsyncCommand()
+        {
+            runningTasks = new ObservableCollection<Task>();
+            runningTasks.CollectionChanged += OnRunningTasksChanged;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Task> RunningTasks
+        {
+            get => runningTasks;
+        }
+
         /// <inheritdoc />
         public event EventHandler CanExecuteChanged
         {
@@ -28,19 +47,31 @@ namespace FaultTrack.Shell.Windows
         }
 
         /// <inheritdoc />
-        async void ICommand.Execute(object parameter)
-        {
-            Task task = ExecuteAsync((T)parameter);
-
-            ConfiguredTaskAwaitable configuredTask = task.ConfigureAwait(false);
-
-            await configuredTask;
-        }
-
-        /// <inheritdoc />
         public abstract bool CanExecute(T parameter);
 
         /// <inheritdoc />
+        async void ICommand.Execute(object parameter)
+        {
+            Task runningTask = ExecuteAsync((T)parameter);
+
+            runningTasks.Add(runningTask);
+
+            try
+            {
+                await runningTask;
+            }
+            finally
+            {
+                runningTasks.Remove(runningTask);
+            }
+        }
+
+        /// <inheritdoc />
         public abstract Task ExecuteAsync(T parameter);
+
+        private void OnRunningTasksChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
     }
 }
